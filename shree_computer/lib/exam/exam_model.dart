@@ -63,12 +63,12 @@ class ExamsModel extends ChangeNotifier {
   ExamDetails getExamDetailsFromSnapshot(dynamic value, dynamic key) {
     ExamDetails updatedExamDetails = new ExamDetails(
       id: key,
-      question: value['question'] ?? "",
-      option1: value['option1'] ?? "",
-      option2: value['option2'] ?? "",
-      option3: value['option3'] ?? "",
-      option4: value['option4'] ?? "",
-      correnctOption: value['connect-option'] ?? "",
+      question: value['q'] ?? "",
+      option1: value['o1'] ?? "",
+      option2: value['o2'] ?? "",
+      option3: value['o3'] ?? "",
+      option4: value['o4'] ?? "",
+      correnctOption: value['c'] ?? "",
     );
     return updatedExamDetails;
   }

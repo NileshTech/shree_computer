@@ -23,7 +23,10 @@ class FirebaseDatabaseUtil {
     database.setPersistenceCacheSizeBytes(10000000);
     _rootRef = FirebaseDatabase.instance.reference();
     _inventoryRef = _rootRef.child(Inventory.refName);
-    _examsRef = _inventoryRef.child(ExamsModel.refName);
+    _examsRef = _inventoryRef
+        .child("subjects")
+        .child("question-papers")
+        .child(ExamsModel.refName);
   }
 
   factory FirebaseDatabaseUtil() {
