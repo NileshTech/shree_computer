@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "389083635580",
+    "firebase_url": "https://shree-computer-ceb6b-default-rtdb.firebaseio.com",
+    "project_id": "shree-computer-ceb6b",
+    "storage_bucket": "shree-computer-ceb6b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389083635580:android:c05594e6a8ba480beb8ef9",
+        "android_client_info": {
+          "package_name": "apj.suffix.shree_computer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389083635580-aet1mejgitq8jenv7mljfm4fnccc3e8d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtpV0yId6jI8-5zFHnG3Kbg0rpjzECzBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "389083635580-aet1mejgitq8jenv7mljfm4fnccc3e8d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
