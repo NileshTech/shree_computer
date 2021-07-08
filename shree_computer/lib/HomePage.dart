@@ -17,10 +17,10 @@ class _HomePageState extends State<HomePage> {
         return Container();
       }),
       create: (BuildContext context) {
-        ExamsModel allGamesModel = ExamsModel();
-        allGamesModel.initialize();
+        ExamsModel allExamsModel = ExamsModel();
+        allExamsModel.initialize();
 
-        return allGamesModel;
+        return allExamsModel;
       },
     );
   }
