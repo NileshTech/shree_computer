@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:shree_computer/exam/exam_model.dart';
-import 'package:shree_computer/exam/inventory.dart';
+import 'package:shree_computer/exam_helper/exam_model.dart';
+import 'package:shree_computer/exam_helper/inventory.dart';
 
 class FirebaseDatabaseUtil {
   static DatabaseReference _rootRef;

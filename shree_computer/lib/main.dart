@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shree_computer/HomePage.dart';
+import 'package:slide_countdown_clock/slide_countdown_clock.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,12 +37,53 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Shree Computer',
-      debugShowCheckedModeBanner: false,
-      builder: (context, child) {
-        return HomePage();
-      },
+    GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+    Duration _duration = const Duration(seconds: 3600);
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBar(
+        title: Text("Shree Computer"),
+        backgroundColor: Colors.indigo,
+      ),
+      body: Stack(
+        children: [
+          HomePage(),
+          Positioned(
+            bottom: 50,
+            left: 10,
+            right: 10,
+            child: Container(
+              child: Column(
+                children: [
+                  Text("Time Remaining to end the exam"),
+                  SlideCountdownClock(
+                    duration: _duration,
+                    slideDirection: SlideDirection.Up,
+                    separator: "-",
+                    textStyle: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                    separatorTextStyle: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        color: Colors.blue, shape: BoxShape.circle),
+                    onDone: () {
+                      _scaffoldKey.currentState.showSnackBar(
+                          SnackBar(content: Text('Clock 1 finished')));
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

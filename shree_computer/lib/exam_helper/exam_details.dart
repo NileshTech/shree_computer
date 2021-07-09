@@ -1,5 +1,5 @@
 class ExamDetails {
-  final int id;
+  final String id;
   final String question;
   final String option1;
   final String option2;
