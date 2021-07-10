@@ -7,11 +7,13 @@ class ExamSubmitted extends StatefulWidget {
       {Key key,
       @required this.studentName,
       @required this.mobileNumber,
-      @required this.city})
+      @required this.city,
+      @required this.correctAnswers})
       : super(key: key);
   final String studentName;
   final String mobileNumber;
   final String city;
+  final int correctAnswers;
 
   @override
   _ExamSubmittedState createState() => _ExamSubmittedState();
@@ -29,6 +31,7 @@ class _ExamSubmittedState extends State<ExamSubmitted> {
       'name': name,
       'mobile-number': mobileNumber,
       'city': city,
+      'correct-answers': widget.correctAnswers
     });
   }
 

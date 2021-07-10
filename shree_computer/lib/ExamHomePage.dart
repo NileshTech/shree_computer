@@ -87,7 +87,8 @@ class _ExamHomePageState extends State<ExamHomePage> {
                               return new ExamSubmitted(
                                   studentName: widget.studentName,
                                   mobileNumber: widget.mobileNumber,
-                                  city: widget.city);
+                                  city: widget.city,
+                                  correctAnswers: 0);
                             }),
                           );
                         },

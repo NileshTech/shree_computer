@@ -36,7 +36,9 @@ class _ExamPageState extends State<ExamPage> {
 
         void checkAnswer(String selctedOption, String correctOption) {
           if (selctedOption == correctOption) {
-            correctAnswers += 1;
+            setState(() {
+              correctAnswers += 1;
+            });
           } else {
             print("wrong answer selected");
           }
@@ -198,7 +200,8 @@ class _ExamPageState extends State<ExamPage> {
                                       return new ExamSubmitted(
                                           studentName: widget.studentName,
                                           mobileNumber: widget.mobileNumber,
-                                          city: widget.city);
+                                          city: widget.city,
+                                          correctAnswers: correctAnswers);
                                     }));
                                   },
                                   color: Colors.red,
