@@ -24,7 +24,6 @@ class _ExamHomePageState extends State<ExamHomePage> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Material(
@@ -85,10 +84,10 @@ class _ExamHomePageState extends State<ExamHomePage> {
                             new MaterialPageRoute(
                                 builder: (BuildContext context) {
                               return new ExamSubmitted(
-                                  studentName: widget.studentName,
-                                  mobileNumber: widget.mobileNumber,
-                                  city: widget.city,
-                                  correctAnswers: 0);
+                                studentName: widget.studentName,
+                                mobileNumber: widget.mobileNumber,
+                                city: widget.city,
+                              );
                             }),
                           );
                         },

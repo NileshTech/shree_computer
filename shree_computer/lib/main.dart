@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shree_computer/Dashboard.dart';
-import 'package:slide_countdown_clock/slide_countdown_clock.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,9 +1,9 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shree_computer/ExamSubmitted.dart';
 import 'package:shree_computer/exam_helper/exam_details.dart';
 import 'package:shree_computer/exam_helper/exam_model.dart';
-import 'package:slide_countdown_clock/slide_countdown_clock.dart';
 
 class ExamPage extends StatefulWidget {
   const ExamPage(
@@ -22,41 +22,150 @@ class ExamPage extends StatefulWidget {
 class _ExamPageState extends State<ExamPage> {
   int questionNumberIndex = 0;
   int correctAnswers = 0;
+  Color option1Color = Colors.indigo;
+  Color option2Color = Colors.indigo;
+  Color option3Color = Colors.indigo;
+  Color option4Color = Colors.indigo;
+  int totalNumberOfQuestions;
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
     return ChangeNotifierProvider<ExamsModel>(
       child: Consumer<ExamsModel>(builder: (context, allExamsModel, child) {
         if (allExamsModel.allExams.length == 0) {
           return Center(
             child: CircularProgressIndicator(),
           );
+        } else {
+          totalNumberOfQuestions = allExamsModel.allExams.length;
         }
 
         void checkAnswer(String selctedOption, String correctOption) {
+          final databaseRef = FirebaseDatabase.instance.reference();
+
           if (selctedOption == correctOption) {
             setState(() {
               correctAnswers += 1;
+              databaseRef
+                  .child("exam-details")
+                  .child("student-id")
+                  .child(widget.mobileNumber)
+                  .update({'correct-answers': correctAnswers});
             });
           } else {
             print("wrong answer selected");
           }
         }
 
-        Widget choiceButton(String option, String correctOption) {
+        Widget choiceButton1(String option, String correctOption) {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 20),
             child: MaterialButton(
               // height: screenSize.height * 0.05,
-              onPressed: () => checkAnswer(option, correctOption),
+              onPressed: () {
+                setState(() {
+                  option1Color = Colors.green;
+                  option2Color = Colors.indigo;
+                  option3Color = Colors.indigo;
+                  option4Color = Colors.indigo;
+                });
+
+                checkAnswer(option, correctOption);
+              },
               child: Text(
                 option,
                 style: TextStyle(
                   color: Colors.white,
                 ),
               ),
-              color: Colors.indigo,
+              color: option1Color,
+              splashColor: Colors.indigoAccent[700],
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+            ),
+          );
+        }
+
+        Widget choiceButton2(String option, String correctOption) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 20),
+            child: MaterialButton(
+              // height: screenSize.height * 0.05,
+              onPressed: () {
+                setState(() {
+                  option1Color = Colors.indigo;
+                  option2Color = Colors.green;
+                  option3Color = Colors.indigo;
+                  option4Color = Colors.indigo;
+                });
+                checkAnswer(option, correctOption);
+              },
+              child: Text(
+                option,
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              color: option2Color,
+              splashColor: Colors.indigoAccent[700],
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+            ),
+          );
+        }
+
+        Widget choiceButton3(String option, String correctOption) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 20),
+            child: MaterialButton(
+              // height: screenSize.height * 0.05,
+              onPressed: () {
+                setState(() {
+                  option1Color = Colors.indigo;
+                  option2Color = Colors.indigo;
+                  option3Color = Colors.green;
+                  option4Color = Colors.indigo;
+                });
+                checkAnswer(option, correctOption);
+              },
+              child: Text(
+                option,
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              color: option3Color,
+              splashColor: Colors.indigoAccent[700],
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+            ),
+          );
+        }
+
+        Widget choiceButton4(String option, String correctOption) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 20),
+            child: MaterialButton(
+              // height: screenSize.height * 0.05,
+              onPressed: () {
+                setState(() {
+                  option1Color = Colors.indigo;
+                  option2Color = Colors.indigo;
+                  option3Color = Colors.indigo;
+                  option4Color = Colors.green;
+                });
+                checkAnswer(option, correctOption);
+              },
+              child: Text(
+                option,
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              color: option4Color,
               splashColor: Colors.indigoAccent[700],
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
@@ -109,13 +218,13 @@ class _ExamPageState extends State<ExamPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      choiceButton(
+                      choiceButton1(
                           currentExam.option1, currentExam.correnctOption),
-                      choiceButton(
+                      choiceButton2(
                           currentExam.option2, currentExam.correnctOption),
-                      choiceButton(
+                      choiceButton3(
                           currentExam.option3, currentExam.correnctOption),
-                      choiceButton(
+                      choiceButton4(
                           currentExam.option4, currentExam.correnctOption),
                     ],
                   ),
@@ -133,6 +242,10 @@ class _ExamPageState extends State<ExamPage> {
                               child: MaterialButton(
                                 onPressed: () {
                                   setState(() {
+                                    option1Color = Colors.indigo;
+                                    option2Color = Colors.indigo;
+                                    option3Color = Colors.indigo;
+                                    option4Color = Colors.indigo;
                                     questionNumberIndex =
                                         questionNumberIndex + 1;
                                   });
@@ -148,17 +261,23 @@ class _ExamPageState extends State<ExamPage> {
                                 ),
                               ),
                             )
-                          : questionNumberIndex != 32
+                          : questionNumberIndex != (totalNumberOfQuestions - 1)
                               ? Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     MaterialButton(
                                       onPressed: () {
-                                        setState(() {
-                                          questionNumberIndex =
-                                              questionNumberIndex - 1;
-                                        });
+                                        Navigator.of(context).pushReplacement(
+                                          new MaterialPageRoute(
+                                              builder: (BuildContext context) {
+                                            return new ExamSubmitted(
+                                              studentName: widget.studentName,
+                                              mobileNumber: widget.mobileNumber,
+                                              city: widget.city,
+                                            );
+                                          }),
+                                        );
                                       },
                                       color: Colors.red,
                                       splashColor: Colors.indigoAccent[700],
@@ -167,13 +286,17 @@ class _ExamPageState extends State<ExamPage> {
                                             BorderRadius.circular(20.0),
                                       ),
                                       child: Text(
-                                        "Previous",
+                                        "End Exam",
                                         style: TextStyle(color: Colors.white),
                                       ),
                                     ),
                                     MaterialButton(
                                       onPressed: () {
                                         setState(() {
+                                          option1Color = Colors.indigo;
+                                          option2Color = Colors.indigo;
+                                          option3Color = Colors.indigo;
+                                          option4Color = Colors.indigo;
                                           questionNumberIndex =
                                               questionNumberIndex + 1;
                                         });
@@ -198,10 +321,10 @@ class _ExamPageState extends State<ExamPage> {
                                         new MaterialPageRoute(
                                             builder: (BuildContext context) {
                                       return new ExamSubmitted(
-                                          studentName: widget.studentName,
-                                          mobileNumber: widget.mobileNumber,
-                                          city: widget.city,
-                                          correctAnswers: correctAnswers);
+                                        studentName: widget.studentName,
+                                        mobileNumber: widget.mobileNumber,
+                                        city: widget.city,
+                                      );
                                     }));
                                   },
                                   color: Colors.red,
