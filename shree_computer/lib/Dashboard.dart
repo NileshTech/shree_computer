@@ -35,7 +35,7 @@ class _DashboardState extends State<Dashboard> {
                   SizedBox(
                     height: screensSize.height * 0.05,
                   ),
-                  appBarContainer(context),
+                  appBarImage(context),
                   Divider(thickness: 2, color: Colors.indigo),
                   SizedBox(
                     height: screensSize.height * 0.05,
